@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ReclamacaoController {
@@ -21,8 +22,9 @@ public class ReclamacaoController {
     }
 
     @PostMapping("/registrar")
-    public String registerReclamacao(Reclamacao reclamacao) {
+    public String registerReclamacao(Reclamacao reclamacao, RedirectAttributes redirectAttributes) {
         reclamacaoRepository.save(reclamacao);
+        redirectAttributes.addFlashAttribute("mensagem", "Reclamação registrada com sucesso!");
         return "redirect:/listar";
     }
 
